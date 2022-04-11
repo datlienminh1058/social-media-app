@@ -1,5 +1,6 @@
 const express = require('express');
-const {register, login, followUser, logout, updatePassword, updateProfile, deleteMyProfile, myProfile, getAllUsers, getUserProfile, forgotPassword, resetPassword, getMyPosts, getUserPosts } = require('../controllers/user')
+const { get2ConversationUsers } = require('../controllers/conversation');
+const {register, login, followUser, logout, updatePassword, updateProfile, deleteMyProfile, myProfile, getAllUsers, getUserProfile, forgotPassword, resetPassword, getMyPosts, getUserPosts, getAllUsersChat } = require('../controllers/user')
 const {isAuthenticated} = require('../middlewares/auth')
 
 const router = express.Router();
@@ -31,4 +32,8 @@ router.route('/users').get(isAuthenticated,getAllUsers);
 router.route('/forgot/password').post(forgotPassword);
 //restet password
 router.route('/password/reset/:token').put(resetPassword);
+//nt
+router.route('/chat').get(isAuthenticated, getUserProfile);
+router.route('/user/friends/:id').get(isAuthenticated, getAllUsersChat);
+
 module.exports = router;

@@ -5,6 +5,7 @@ import App from './App';
 import store from './store';
 import {Provider as AlertProvider, positions, transitions} from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const options = {
   position: positions.BOTTOM_CENTER,

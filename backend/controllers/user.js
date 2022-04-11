@@ -485,7 +485,7 @@ exports.getMyPosts = async (req, res) => {
 
 exports.getUserPosts = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.user._id);
 
     const posts = [];
 
@@ -507,3 +507,31 @@ exports.getUserPosts = async (req, res) => {
     });
   }
 };
+
+exports.getAllUsersChat = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    
+    const friends = await Promise.all(
+      user.following.map((friendId) => {
+        return User.findById(friendId);
+      })
+    );
+    let friendList = [];
+    friends.map((friend) => {
+      const { _id, name, avatar } = friend;
+      friendList.push( _id, name, avatar,);
+    });
+    
+    res.status(200).json({
+      success: true,
+      friendList,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    })
+  }
+}

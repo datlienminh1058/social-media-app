@@ -1,5 +1,5 @@
 import './App.css'
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {BrowserRouter as Router,Routes, Route} from 'react-router-dom'
 import Header from './Components/Header/Header'
 import Login from './Components/Login/Login'
@@ -16,6 +16,8 @@ import ResetPassword from './Components/ResetPassword/ResetPassword'
 import UserProfile from './Components/UserProfile/UserProfile'
 import Search from './Components/Search/Search'
 import NotFound from './Components/NotFound/NotFound'
+import Messenger from './Components/Messenger/Messenger'
+
 
 const App = () => {
 
@@ -45,6 +47,7 @@ const App = () => {
         <Route path='/user/:id' element={ isAuthenticated ? <UserProfile /> : <Login />} />
         <Route path='search' element={ isAuthenticated ? <Search /> : <Login />} />
         <Route path='*' element={<NotFound />} />
+        <Route path='/messenger' element={isAuthenticated ? <Messenger /> : <Login />} />
       </Routes>
  
     </Router>

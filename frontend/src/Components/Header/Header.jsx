@@ -10,6 +10,8 @@ import {
   Search,
   AccountCircle,
   AccountCircleOutlined,
+  Chat,
+  ChatOutlined,
 } from "@mui/icons-material";
 
 const Header = () => {
@@ -43,6 +45,14 @@ const Header = () => {
           <AccountCircleOutlined />
         )}
       </Link>
+      <Link to="/messenger" onClick={() => setTab("/messenger")}>
+        {tab === "/messenger" ? (
+          <Chat style={{ color: "black" }} />
+        ) : (
+          <ChatOutlined />
+        )}
+      </Link>
+
     </div>
   );
 };

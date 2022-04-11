@@ -4,6 +4,8 @@ const {connectDatabase} = require("./config/database");
 
 const cloudinary = require('cloudinary');
 
+const express = require('express');
+
 connectDatabase();
 
 cloudinary.config({
@@ -12,7 +14,9 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+
 app.listen(process.env.PORT,() =>{
     console.log(`Server is running on port ${process.env.PORT}`);
 
 } );
+
