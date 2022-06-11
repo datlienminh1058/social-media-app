@@ -24,6 +24,7 @@ import CommentCard from "../CommentCard/CommentCard";
 const Post = ({
   postId,
   caption,
+  detail,
   postImage,
   likes = [],
   comments = [],
@@ -39,6 +40,8 @@ const Post = ({
   const [commentToggle, setCommentToggle] = useState(false);
   const [captionValue, setCaptionValue] = useState(caption);
   const [captionToggle, setCaptionToggle] = useState(false);
+  const [detailValue, setDetailValue] = useState(detail);
+  const [detailToggle, setDetailToggle] = useState(false);
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -94,10 +97,15 @@ const Post = ({
             <MoreVert />
           </Button>
         ) : null}
+        {isAccount ? (
+          <Button onClick={() => setDetailToggle(!detailToggle)}>
+            <MoreVert />
+          </Button>
+        ) : null}
       </div>
 
       <img src={postImage} alt="Post" />
-
+      
       <div className="postDetails">
         <Avatar
           src={ownerImage}
@@ -107,17 +115,24 @@ const Post = ({
             width: "3vmax",
           }}
         />
-
+        
         <Link to={`/user/${ownerId}`}>
           <Typography fontWeight={700}>{ownerName}</Typography>
         </Link>
-
         <Typography
-          fontWeight={100}
+          fontWeight={500}
           color="rgba(0, 0, 0, 0.582)"
           style={{ alignSelf: "center" }}
         >
           {caption}
+        </Typography>
+        <Typography
+          class='detail'
+          fontWeight={100}
+          color="rgba(0, 0, 0, 0.582)"
+          style={{ alignSelf: "center" }}
+        >
+         
         </Typography>
       </div>
 
@@ -218,6 +233,28 @@ const Post = ({
               value={captionValue}
               onChange={(e) => setCaptionValue(e.target.value)}
               placeholder="Caption Here..."
+              required
+            />
+
+            <Button type="submit" variant="contained">
+              Update
+            </Button>
+          </form>
+        </div>
+      </Dialog>
+      <Dialog
+        open={detailToggle}
+        onClose={() => setDetailToggle(!detailToggle)}
+      >
+        <div className="DialogBox">
+          <Typography variant="h4">Update Detail</Typography>
+
+          <form className="commentForm" onSubmit={updateCaptionHandler}>
+            <input
+              type="text"
+              value={detailValue}
+              onChange={(e) => setCaptionValue(e.target.value)}
+              placeholder="Detail Here..."
               required
             />
 

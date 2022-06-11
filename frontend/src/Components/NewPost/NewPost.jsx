@@ -1,14 +1,22 @@
 import { Button, Typography } from "@mui/material";
+import Dropdown from 'react-dropdown';
 import React, { useEffect, useState } from "react";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewPost } from "../../Actions/Post";
 import { loadUser } from "../../Actions/User";
 import "./NewPost.css";
+import './DayPicker.css'
+
+import {DayPicker} from 'react-daypicker';
+
+
+
 const NewPost = () => {
   const [image, setImage] = useState(null);
   const [caption, setCaption] = useState("");
-
+  const [detail, setDetail] = useState("");
+  const [time, setTime] = useState(new Date());
   const { loading, error, message } = useSelector((state) => state.like);
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -28,7 +36,7 @@ const NewPost = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    await dispatch(createNewPost(caption, image));
+    await dispatch(createNewPost(caption, image, detail, time));
     dispatch(loadUser());
   };
 
@@ -44,7 +52,9 @@ const NewPost = () => {
     }
   }, [dispatch, error, message, alert]);
 
+
   return (
+    
     <div className="newPost">
       <form className="newPostForm" onSubmit={submitHandler}>
         <Typography variant="h3">New Post</Typography>
@@ -57,9 +67,13 @@ const NewPost = () => {
           value={caption}
           onChange={(e) => setCaption(e.target.value)}
         />
-        <Button disabled={loading} type="submit">
-          Post
-        </Button>
+        <input
+        type="text"
+        placeholder="Detail..."
+        value={detail}
+        onChange={(e) => setDetail(e.target.value)}
+        />
+        <DayPicker value={time} onChange={(e) => setTime(e.target.value)}/>
       </form>
     </div>
   );
