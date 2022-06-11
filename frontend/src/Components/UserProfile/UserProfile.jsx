@@ -94,6 +94,7 @@ const UserProfile = () => {
               key={post?._id}
               postId={post?._id}
               caption={post?.caption}
+              detail={post?.detail}
               postImage={post?.image.url}
               likes={post?.likes}
               comments={post?.comments}

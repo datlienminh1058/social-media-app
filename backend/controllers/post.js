@@ -8,6 +8,7 @@ exports.createPost = async (req, res) => {
     });
     const newPostData = {
       caption: req.body.caption,
+      detail: req.body.detail,
       image: {
         public_id: myCloud.public_id,
         url: myCloud.secure_url,

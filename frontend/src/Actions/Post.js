@@ -69,7 +69,7 @@ export const deleteCommentOnPost = (id, commentId) => async (dispatch) => {
   }
 };
 
-export const createNewPost = (caption, image) => async (dispatch) => {
+export const createNewPost = (caption, image, detail) => async (dispatch) => {
   try {
     dispatch({
       type: "newPostRequest",
@@ -80,6 +80,7 @@ export const createNewPost = (caption, image) => async (dispatch) => {
       {
         caption,
         image,
+        detail,
       },
       {
         headers: {
